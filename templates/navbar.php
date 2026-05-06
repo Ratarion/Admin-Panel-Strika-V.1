@@ -44,6 +44,12 @@ $isAdmin = ($_SESSION['role'] ?? 0) === 1;
             </a>
         </li>
 
+        <li>
+            <a href="/change-password" class="menu-link <?= strpos($current_uri, '/change-password') !== false ? 'active' : '' ?>">
+                🔑 <span>Сменить пароль</span>
+            </a>
+        </li>
+
         <?php if (isset($_SESSION['admin_id'])): ?>
         <li style="margin-top: 30px;">
             <a href="/logout" class="menu-link logout">

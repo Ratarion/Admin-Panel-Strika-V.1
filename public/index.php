@@ -77,6 +77,11 @@ switch ($uri) {
         $controller->exportDocx();
         break;
 
+    case '/change-password':
+        $controller = new App\Controllers\AuthController($pdo);
+        $controller->changePassword();
+        break;
+
     default:
         http_response_code(404);
         echo "<h1>404 — Страница не найдена</h1>";

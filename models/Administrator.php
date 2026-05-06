@@ -25,6 +25,14 @@ class Administrator
     }
 
     /**
+    * Установить и сразу захешировать пароль
+    */
+    public function setPassword($password) 
+    {
+        $this->password_hash = password_hash($password, PASSWORD_DEFAULT);
+    }
+
+    /**
      * Загрузить администратора по ID
      */
     public function load($id)

@@ -73,4 +73,33 @@ class AuthController extends BaseController
 
         $this->redirect('/booking');
     }
+
+    public function changePassword()
+    {
+        // Проверка авторизации
+        if (!isset($_SESSION['admin_id'])) {
+            $this->redirect('/login');
+        }
+
+        $message = '';
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $newPass = $_POST['new_password'] ?? '';
+            
+            if (strlen($newPass) < 4) {
+                $message = "Пароль слишком короткий";
+            } else {
+                $admin = new Administrator($this->pdo);
+                if ($admin->load($_SESSION['admin_id'])) {
+                    $admin->setPassword($newPass); // Хешируем
+                    if ($admin->save()) {
+                        $message = "Пароль успешно обновлен!";
+                        $this->log->info("Админ {$_SESSION['username']} сменил пароль");
+                    }
+                }
+            }
+        }
+
+        $this->render('change_password', ['message' => $message]);
+    }
 }
