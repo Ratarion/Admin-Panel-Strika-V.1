@@ -1,16 +1,18 @@
-FROM php:8.0-apache
+FROM php:8.2-apache
 
-# Устанавливаем системные зависимости, нужные для PostgreSQL
-RUN apt-get update && apt-get install -y \
-    libpng-dev \
-    libonig-dev \
-    libxml2-dev \
-    libpq-dev \
-    libzip-dev \
-    zip \
-    unzip \
-    git \
-    curl
+RUN find /etc/apt/ -type f -name "*.list*" -exec sed -i 's|http://deb.debian.org|https://deb.debian.org|g' {} \; && \
+    find /etc/apt/ -type f -name "*.list*" -exec sed -i 's|http://security.debian.org|https://security.debian.org|g' {} \; && \
+    apt-get update && apt-get install -y \
+        libpng-dev \
+        libonig-dev \
+        libxml2-dev \
+        libpq-dev \
+        libzip-dev \
+        zip \
+        unzip \
+        git \
+        curl \
+    && rm -rf /var/lib/apt/lists/*
 
 # Устанавливаем расширения PHP (добавили pdo_pgsql и pgsql)
 RUN docker-php-ext-install pdo_mysql pdo_pgsql pgsql mbstring exif pcntl bcmath gd zip
