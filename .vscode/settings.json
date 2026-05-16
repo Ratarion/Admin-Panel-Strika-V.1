@@ -1,0 +1,13 @@
+{
+    "files.exclude": {
+        ".env": true,
+        ".gitignore": false,
+        "composer.json": true,
+        "composer.lock": true,
+        ".vscode": true,
+        ".osp": true,
+        "vendor": false,
+        "README.md": false,
+        "wiki": false
+    }
+}

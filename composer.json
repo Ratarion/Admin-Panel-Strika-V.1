@@ -1,0 +1,13 @@
+{
+    "autoload": {
+        "psr-4": {
+            "Models\\": "models/"
+        }
+    },
+    "require": {
+        "vlucas/phpdotenv": "^5.6",
+        "monolog/monolog": "^2.11",
+        "phpoffice/phpspreadsheet": "^2.1",
+        "phpoffice/phpword": "^1.4"
+    }
+}
